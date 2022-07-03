@@ -3,13 +3,14 @@ import { useState } from 'react';
 import { createUser } from './lib/hue';
 
 function App() { 
-  const [ip, setIp] = useState("") 
+  const [ip, setIp] = useState("192.168.0.XXX") 
   const [username, setUsername] = useState("") 
   const [deviceType, setDeviceType] = useState("web") 
   const [state, setState] = useState("START")
 
   const start = () => {
     if(ip === "" || deviceType === "") return alert("Missing ip or device type")
+    if(ip === "192.168.0.XXX") return alert("Please check your ip")
     
     createUser(ip, deviceType)
       .then(result => {
@@ -21,7 +22,7 @@ function App() {
           }
       }).catch(e => {
         console.log(e)
-        alert("Something went wrong, see console for more information")
+        alert("Failed to send Request to Bridge. In order for your browser to be able to send a request to the bridge, you must manually classify the bridge's website as safe. To do this, go to your Bridge IP with HTTPS, click on advanced and then on Proceed or Accept risk and continue.")
       })
   }
 
@@ -55,7 +56,8 @@ function App() {
 
           <button onClick={start}>Start</button>
 
-          <p>Don't know what your IP is? You can find the IP on your router's dashboard or <a href='https://discovery.meethue.com/'>on this website</a>.</p>
+          <p>Don't know what your Bridge IP is? You can find the IP on your router's dashboard or <a href='https://discovery.meethue.com/'>on this website</a>.</p>
+          <p>In order for your browser to be able to send a request to the bridge, you must manually classify the bridge's website as safe. To do this, go to your Bridge IP with HTTPS (<a href={`https://${ip}`}>https://{ip}</a>), click on "advanced" and then on "Proceed" or "Accept risk and continue".</p>
           </>}
 
           {state === "LINK" && <>

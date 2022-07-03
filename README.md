@@ -2,4 +2,4 @@
 
 Online Philips Hue Bridge username generator to use the local Philips Hue API.
 
-If you want to, you can use the online version at https://hue-username-generator.vercel.app. It also works offline and no data is sent to any server. It doesn't work with Firefox because Firefox blocks all requests to the local bridge ip. In my tests, it worked with Chromium-based browsers (e.g. Chrome or Edge). However, after the first request is sent, the page is classified as "Not Secure". But only as long as you stay on the page, when you open it again, everything is back to normal.
+If you want to, you can use the online version at https://hue-username-generator.vercel.app. It also works offline and no data is sent to any server. Because the app has to use HTTPS requests to the bridge (HTTP doesn't work, you can't send an http request from an https website) the browser has to recognize the bridge's self-signed certificate as valid in order to be able to send requests. To do this, open your bridge's website as an https website (https://YOUR_IP) and follow the instructions so that you can access the page.
